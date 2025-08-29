@@ -10,7 +10,7 @@ module.exports = {
   	extend: {
       fontFamily: {
         sans: ["var(--font-lato)", "sans-serif"], // por defecto
-        jakarta: ["var(--font-plusjakarta)", "sans-serif"], // títulos
+        jakarta: ["var(--font-plus-jakarta)", "sans-serif"], // títulos
         pacifico: ["var(--font-pacifico)", "cursive"], // palabras especiales
       },
       boxShadow: {
