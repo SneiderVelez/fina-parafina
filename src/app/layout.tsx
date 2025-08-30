@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lato, Plus_Jakarta_Sans, Pacifico } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/ui/shared/header";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -34,6 +35,7 @@ export default function RootLayout({
       lang="en"
       className={`${lato.variable} ${plusJakarta.variable} ${pacifico.variable}`}
     >
+      <Header />
       <body className="font-lato bg-brand-main">{children}</body>
     </html>
   );
