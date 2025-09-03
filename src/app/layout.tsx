@@ -35,8 +35,11 @@ export default function RootLayout({
       lang="en"
       className={`${lato.variable} ${plusJakarta.variable} ${pacifico.variable}`}
     >
-      <Header />
-      <body className="font-lato bg-brand-main">{children}</body>
+      <body className="font-lato bg-brand-secondary">
+        <Header />
+
+        {children}
+      </body>
     </html>
   );
 }

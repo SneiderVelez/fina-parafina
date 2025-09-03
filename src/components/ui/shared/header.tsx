@@ -4,7 +4,7 @@ import Logo from "../../../../public/image/Logo.svg";
 
 const Header = () => {
   return (
-    <header className="h-[76px] bg-black m-3 mb-0 rounded-lg border border-brand-secondary shadow-customBottom flex flex-row items-center justify-between px-5">
+    <header className="h-[76px] bg-black/70 backdrop-blur-md m-1 mb-0 rounded-lg border border-brand-secondary shadow-customBottom flex flex-row items-center justify-between px-5 fixed top-0 left-0 right-0 z-50">
       <figure>
         <Image src={Logo} alt="logo" width={105} height={59.02} />
       </figure>
