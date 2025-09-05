@@ -1,46 +1,49 @@
 import { Button } from "./button";
 import Image from "next/image";
 
-interface CardCategoriesProps {
-  icon: string;
+interface CardProductsProps {
+  image_product: string;
   title: string;
   description: string;
+  price: string;
   buttonText?: string;
   variant?: "light" | "dark";
 }
 
-const CardCategories = ({
-  icon,
+const CardProducts = ({
+  image_product,
   title,
   description,
+  price,
   buttonText = "Ver mas →",
   variant = "light",
-}: CardCategoriesProps) => {
+}: CardProductsProps) => {
   const bgColor = variant === "light" ? "bg-brand-tertiary" : "bg-gray-100";
 
   return (
     <div
       className={`${bgColor} rounded-2xl p-3 xl:p-6 hover:shadow-custom flex flex-col gap-2 hover:scale-105 transition-all duration-300 `}
     >
-      <div className=" rounded-full flex items-center justify-between">
+      <section>
         <Image
-          src={icon}
+          src={image_product}
           alt={title}
           width={60}
           height={60}
           className="object-contain"
         />
-        <Button variant="ghost">{buttonText}</Button>
-      </div>
-
-      <h3 className="font-jakarta text-lg xl:text-2xl font-bold text-gray-700">
-        {title}
-      </h3>
-      <p className=" text-gray-600 text-sm xl:text-lg leading-4 xl:leading-relaxed">
-        {description}
-      </p>
+      </section>
+      <section className="bg-gradient-to-tr via-white from-gray-700">
+        <h3 className="font-jakarta text-lg xl:text-2xl font-bold text-gray-700">
+          {title}
+        </h3>
+        <p className=" text-gray-600 text-sm xl:text-lg leading-4 xl:leading-relaxed">
+          {description}
+        </p>
+      </section>
+      <Button variant="ghost">{buttonText}</Button>
     </div>
   );
 };
 
-export default CardCategories;
+export default CardProducts;

@@ -3,12 +3,12 @@ import CardCategories from "./ui/card-categories";
 
 const CategoriesSection = () => {
   return (
-    <section className="w-10/12 mx-auto flex flex-col gap-16 my-16">
+    <section className="w-9/12 xl:w-10/12 mx-auto flex flex-col gap-16 my-16">
       <h1 className="font-jakarta text-[48px] leading-[54px] text-gray-700">
         Todo lo que necesitas{" "}
         <span className="font-pacifico text-[64px]">para crear</span>
       </h1>
-      <div className="grid grid-cols-3 gap-x-8 gap-y-8 col-span-2">
+      <div className="grid grid-cols-3 gap-3 xl:gap-x-8 xl:gap-y-8 col-span-2">
         <CardCategories
           icon={"/image/icon-candle.png"}
           title="Ceras y parafinas"
