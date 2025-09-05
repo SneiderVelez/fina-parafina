@@ -71,14 +71,16 @@ module.exports = {
   				main: '#ECF4F9',         // Fondo principal (Azul muy claro)
   				secondary: '#FDF9F3',    // Fondo secundario (Beige muy claro)
   				tertiary: '#F5F0E8',     // Fondo terciario (Beige ligeramente más oscuro)
+				quaternary: '#B8C5D1',   
+				quinary: '#D4A574 ',
   			},
   			
   			// 🟡 Familia Amarillo (Primary - Botones principales/Destacados)
   			yellow: {
-  				DEFAULT: '#F2B705',       // Principal (Amarillo cálido)
-  				50: '#F2B70520',         // Light/Subtle (20% opacidad)
-  				100: '#F2B70550',        // Disabled (50% opacidad)
-  				500: '#F2B705',          // Principal
+  				DEFAULT: '#FFD700',       // Principal (Amarillo cálido)
+  				50: '#FFD70020',         // Light/Subtle (20% opacidad)
+  				100: '#FFD70050',        // Disabled (50% opacidad)
+  				500: '#FFD700',          // Principal
   				600: '#D4A004',          // Hover (Amarillo más intenso)
   				700: '#B8890E',          // Active/Pressed (Amarillo más oscuro)
   			},
