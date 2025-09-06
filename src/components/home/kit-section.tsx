@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import CardKit from "./ui/card-kit";
+import CardKit from "../ui/card-kit";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 const KitSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);

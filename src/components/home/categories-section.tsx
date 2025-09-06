@@ -1,9 +1,9 @@
-import { Button } from "./ui/button";
-import CardCategories from "./ui/card-categories";
+import { Button } from "../ui/button";
+import CardCategories from "../ui/card-categories";
 
 const CategoriesSection = () => {
   return (
-    <div className="bg-brand-main py-16">
+    <div className="bg-gray-800 py-16">
       <section className="w-10/12  mx-auto flex flex-col gap-16 ">
         <h1 className="font-jakarta text-[20px] font-bold leading-[40px] xl:text-[30px] xl:leading-[54px] text-gray-700 text-center">
           Todo lo que necesitas para crear

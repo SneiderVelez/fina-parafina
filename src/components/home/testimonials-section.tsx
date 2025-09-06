@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "./ui/button";
-import CardTestimonials from "./ui/card-testimonials";
+import { Button } from "../ui/button";
+import CardTestimonials from "../ui/card-testimonials";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const TestimonialsSection = () => {
@@ -62,7 +62,7 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <div className="items-center flex flex-col gap-8 pb-16 bg-gradient-to-b from-brand-quinary via-brand-secondary">
+    <div className="items-center flex flex-col gap-8 pb-16 bg-gradient-to-b from-gray-800 via-brand-secondary">
       <section className="flex flex-col items-center">
         <h1 className="font-jakarta text-[20px] font-bold leading-[40px] xl:text-[30px] xl:leading-[54px] text-gray-700 ">
           Lo que nuestros clientes dicen de Fina Parafina

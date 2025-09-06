@@ -1,8 +1,8 @@
-import CardProducts from "./ui/card-products";
+import CardProducts from "../ui/card-products";
 
 const ProductsSection = () => {
   return (
-    <section className="bg-gradient-to-t from-brand-quinary via-brand-secondary  flex flex-col gap-8 pb-16">
+    <section className="bg-gradient-to-t from-gray-800 via-brand-secondary  flex flex-col gap-8 pb-16">
       <div className="w-9/12 2xl:w-8/12 mx-auto my-16">
         <h1 className="font-jakarta text-[20px] font-bold leading-[40px] xl:text-[30px] xl:leading-[54px] text-gray-700 text-center">
           Favoritos de Nuestros Artesanos

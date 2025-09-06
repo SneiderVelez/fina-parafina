@@ -40,7 +40,7 @@ const CardProducts = ({
           fill
           className="object-cover object-center"
         />
-        <Badge variant="secondary" className="absolute top-2 left-0">
+        <Badge variant="secondary" size="sm" className="absolute top-2 left-0">
           {price}
         </Badge>
       </section>
