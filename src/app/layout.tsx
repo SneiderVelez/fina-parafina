@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Lato, Plus_Jakarta_Sans, Pacifico } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/ui/shared/footer";
+import Footer from "@/components/shared/footer";
 import Header from "@/components/shared/header";
 
 const lato = Lato({

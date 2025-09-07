@@ -11,7 +11,7 @@ const ContactChannels = () => {
       info: "(+57) 300 000 0000",
       buttonText: "Escribenos por WhatsApp",
       buttonAction: () => window.open("https://wa.me/573000000000", "_blank"),
-      color: "from-green-400 to-emerald-500",
+      color: "from-blue-700 to-blue-500",
     },
     {
       icon: Mail,
@@ -20,7 +20,7 @@ const ContactChannels = () => {
       buttonText: "Enviar correo",
       buttonAction: () =>
         window.open("mailto:contacto@finaparafina.com", "_blank"),
-      color: "from-blue-400 to-cyan-500",
+      color: "from-blue-700 to-blue-500",
     },
     {
       icon: MapPin,
@@ -28,19 +28,26 @@ const ContactChannels = () => {
       info: "Calle XX # XX-XX, Medellín, Colombia",
       buttonText: "Ver en Google Maps",
       buttonAction: () => window.open("https://maps.google.com", "_blank"),
-      color: "from-red-400 to-pink-500",
+      color: "from-blue-700 to-blue-500",
     },
   ];
 
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="font-jakarta text-3xl xl:text-4xl font-bold text-gray-800 mb-4">
-            Canales de{" "}
-            <span className="font-pacifico text-4xl xl:text-5xl text-blue">
-              Contacto
-            </span>
+    <section className="py-16 flex flex-col items-center justify-center gap-16">
+      <div className="max-w-4xl mx-auto px-4 text-center">
+        <h1 className="font-jakarta text-4xl xl:text-5xl font-bold text-gray-700 mb-6">
+          Estamos aquí para ayudarte
+        </h1>
+
+        <p className="font-lato text-lg xl:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto">
+          Si tienes dudas, pedidos especiales o quieres saber más sobre nuestros
+          insumos, estamos a un mensaje de distancia.
+        </p>
+      </div>
+      <div className="max-w-6xl mx-auto px-4 flex flex-col gap-8">
+        <div className="text-center flex flex-col items-center justify-center">
+          <h2 className="font-jakarta text-3xl xl:text-4xl font-bold text-gray-700  ">
+            Canales de contacto
           </h2>
           <p className="font-lato text-lg text-gray-600 max-w-3xl mx-auto">
             Elige la forma que más te convenga para comunicarte con nosotros.
@@ -53,22 +60,25 @@ const ContactChannels = () => {
             return (
               <div
                 key={index}
-                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-100"
+                className="bg-white rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-100"
               >
                 <div className="text-center">
-                  <div
-                    className={`inline-flex w-16 h-16 bg-gradient-to-br ${method.color} rounded-2xl items-center justify-center mb-6`}
-                  >
-                    <IconComponent className="w-8 h-8 text-white" />
+                  <div className="flex flex-row  gap-4">
+                    <div
+                      className={`inline-flex w-16 h-16 bg-gradient-to-br ${method.color} rounded-2xl items-center justify-center mb-6`}
+                    >
+                      <IconComponent className="w-8 h-8 text-white" />
+                    </div>
+                    <div className="flex flex-col items-start justify-start">
+                      <h3 className="font-jakarta text-xl font-semibold text-gray-700">
+                        {method.title}
+                      </h3>
+
+                      <p className="font-lato text-gray-600 text-left">
+                        {method.info}
+                      </p>
+                    </div>
                   </div>
-
-                  <h3 className="font-jakarta text-xl font-semibold text-gray-800 mb-3">
-                    {method.title}
-                  </h3>
-
-                  <p className="font-lato text-gray-600 mb-6 leading-relaxed">
-                    {method.info}
-                  </p>
 
                   <Button
                     onClick={method.buttonAction}

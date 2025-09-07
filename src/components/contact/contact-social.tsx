@@ -9,21 +9,21 @@ const ContactSocial = () => {
       icon: Facebook,
       name: "Facebook",
       url: "https://facebook.com/finaparafina",
-      color: "from-blue-600 to-blue-700",
+      color: "from-gray-700 to-gray-500",
       description: "Síguenos para tips y novedades",
     },
     {
       icon: Instagram,
       name: "Instagram",
       url: "https://instagram.com/finaparafina",
-      color: "from-pink-500 to-purple-600",
+      color: "from-gray-700 to-gray-500",
       description: "Descubre nuestras creaciones",
     },
     {
       icon: MessageCircle,
       name: "TikTok",
       url: "https://tiktok.com/@finaparafina",
-      color: "from-gray-800 to-gray-900",
+      color: "from-gray-700 to-gray-500",
       description: "Tutoriales y contenido divertido",
     },
   ];
@@ -31,11 +31,8 @@ const ContactSocial = () => {
   return (
     <section className="py-16 bg-white">
       <div className="max-w-4xl mx-auto px-4 text-center">
-        <h2 className="font-jakarta text-3xl xl:text-4xl font-bold text-gray-800 mb-4">
-          Síguenos en{" "}
-          <span className="font-pacifico text-4xl xl:text-5xl text-blue">
-            Redes Sociales
-          </span>
+        <h2 className="font-jakarta text-3xl xl:text-4xl font-bold text-gray-700 mb-4">
+          Síguenos en redes sociales
         </h2>
 
         <p className="font-lato text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
@@ -56,7 +53,7 @@ const ContactSocial = () => {
                   <IconComponent className="w-8 h-8 text-white" />
                 </div>
 
-                <h3 className="font-jakarta text-xl font-semibold text-gray-800 mb-2">
+                <h3 className="font-jakarta text-xl font-semibold text-gray-700 mb-2">
                   {social.name}
                 </h3>
 
@@ -67,7 +64,7 @@ const ContactSocial = () => {
                 <Button
                   onClick={() => window.open(social.url, "_blank")}
                   variant="outline"
-                  className="w-full hover:bg-gray-50"
+                  className="w-full "
                 >
                   Seguir en {social.name}
                 </Button>
@@ -76,7 +73,7 @@ const ContactSocial = () => {
           })}
         </div>
 
-        <div className="mt-12 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl">
+        <div className="mt-12 p-6 bg-gradient-to-r from-white to-blue-100 rounded-2xl">
           <p className="font-lato text-gray-700 italic">
             "Conecta con nuestra comunidad de artesanos y descubre el mundo de
             las velas artesanales"

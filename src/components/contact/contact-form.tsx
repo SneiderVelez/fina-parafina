@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { MessageCircle, Send } from "lucide-react";
+import { Textarea } from "../ui/textarea";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -24,22 +25,17 @@ const ContactForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Aquí puedes agregar la lógica para enviar el formulario
     console.log("Formulario enviado:", formData);
-    // Resetear formulario
     setFormData({ name: "", email: "", message: "" });
     alert("¡Mensaje enviado! Te contactaremos pronto.");
   };
 
   return (
-    <section className="py-16 bg-gradient-to-br from-brand-quaternary to-brand-quinary">
+    <section className="py-16 bg-brand-main ">
       <div className="max-w-4xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="font-jakarta text-3xl xl:text-4xl font-bold text-gray-800 mb-4">
-            Formulario de{" "}
-            <span className="font-pacifico text-4xl xl:text-5xl text-blue">
-              Contacto
-            </span>
+          <h2 className="font-jakarta text-3xl xl:text-4xl font-bold text-gray-700 mb-4">
+            Formulario de contacto
           </h2>
           <p className="font-lato text-lg text-gray-600 max-w-2xl mx-auto">
             Envíanos un mensaje y te responderemos lo antes posible.
@@ -48,7 +44,6 @@ const ContactForm = () => {
 
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Nombre completo */}
             <div>
               <label
                 htmlFor="name"
@@ -68,7 +63,6 @@ const ContactForm = () => {
               />
             </div>
 
-            {/* Correo electrónico */}
             <div>
               <label
                 htmlFor="email"
@@ -88,7 +82,6 @@ const ContactForm = () => {
               />
             </div>
 
-            {/* Mensaje */}
             <div>
               <label
                 htmlFor="message"
@@ -96,7 +89,7 @@ const ContactForm = () => {
               >
                 Mensaje / consulta
               </label>
-              <textarea
+              <Textarea
                 id="message"
                 name="message"
                 value={formData.message}
@@ -104,16 +97,11 @@ const ContactForm = () => {
                 placeholder="Cuéntanos en qué podemos ayudarte..."
                 required
                 rows={5}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
               />
             </div>
 
-            {/* Botón de envío */}
             <div className="text-center">
-              <Button
-                type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg font-semibold"
-              >
+              <Button type="submit">
                 <Send className="w-5 h-5 mr-2" />
                 Enviar mensaje
               </Button>

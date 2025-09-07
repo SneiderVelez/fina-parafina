@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import Logo from "../../../public/image/Logo.svg";
+import { Separator } from "../ui/separator";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -46,7 +47,34 @@ const Header = () => {
           <Button variant="text">Contacto</Button>
         </Link>
       </section>
-      <section></section>
+      <section className="flex items-center gap-4">
+        <Button variant="ghost" className="relative transition-colors">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-white hover:text-yellow"
+          >
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="m1 1 4 4 13 1-1 7H6"></path>
+          </svg>
+          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+            0
+          </span>
+        </Button>
+        <Separator orientation="vertical" className="h-7 w-0.5" />
+        <div className="flex items-center gap-2">
+          <Button variant="text">Ingresar</Button>
+          <Separator orientation="vertical" className="h-7 w-0.5" />
+          <Button variant="text">Registrarse</Button>
+        </div>
+      </section>
     </header>
   );
 };

@@ -15,7 +15,7 @@ module.exports = {
       },
       boxShadow: {
         custom: "0px 0px 20px rgba(0,0,0,0.25)",       // sombra difusa en todos lados
-        customTop: "0px -5px 10px rgba(0,0,0,0.25)",   // sombra hacia arriba
+        customTop: "0px -2px 10px rgba(0,0,0,0.25)",   // sombra hacia arriba
         customBottom: "0px 4px 8px rgba(0,0,0,0.25)",  // sombra hacia abajo
       },
   		borderRadius: {
