@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lato, Plus_Jakarta_Sans, Pacifico } from "next/font/google";
 import "./globals.css";
+import Footer from "@/components/ui/shared/footer";
 import Header from "@/components/shared/header";
 
 const lato = Lato({
@@ -37,8 +38,8 @@ export default function RootLayout({
     >
       <body className="font-lato bg-brand-secondary">
         <Header />
-
         {children}
+        <Footer />
       </body>
     </html>
   );
