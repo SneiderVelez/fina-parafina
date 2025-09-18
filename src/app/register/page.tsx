@@ -11,7 +11,7 @@ export default function RegisterPage() {
   const router = useRouter();
 
   return (
-    <main className="flex flex-col items-center justify-start min-h-screen pt-10 px-4 gap-8">
+    <main className="flex flex-col items-center justify-start min-h-screen p-10 px-4 gap-8">
       {/* Botón de devolverse */}
       <div
         className="flex items-center justify-center w-12 h-12 bg-white rounded-lg shadow-md cursor-pointer"
