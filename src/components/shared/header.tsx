@@ -70,9 +70,13 @@ const Header = () => {
         </Button>
         <Separator orientation="vertical" className="h-7 w-0.5" />
         <div className="flex items-center gap-2">
-          <Button variant="text">Ingresar</Button>
+          <Link href="/login">
+         <Button variant="text">Ingresar</Button>
+          </Link>
           <Separator orientation="vertical" className="h-7 w-0.5" />
+          <Link href="/register">
           <Button variant="text">Registrarse</Button>
+          </Link>
         </div>
       </section>
     </header>
