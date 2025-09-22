@@ -20,7 +20,7 @@ const buttonVariants = cva(
         ghost: "hover:text-yellow bg-gray-700 text-white ",
         footer:
           "text-[14px] font-normal text-black hover:underline hover:text-white",
-        link: "text-primary underline-offset-4 hover:underline",
+        link: "text-red underline-offset-4 hover:underline",
       },
       size: {
         default: "p-3",
