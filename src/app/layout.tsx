@@ -3,6 +3,7 @@ import { Lato, Plus_Jakarta_Sans, Pacifico } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/shared/footer";
 import Header from "@/components/shared/header";
+import { Toaster } from "sonner";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -40,6 +41,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <Toaster />
       </body>
     </html>
   );
