@@ -1,24 +1,116 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import Logo from "../../../public/image/Logo.svg";
 import { Separator } from "../ui/separator";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+
+function decodeNameFromJwt(token: string): string | null {
+  try {
+    const parts = token.split(".");
+    if (parts.length !== 3) return null;
+    const payload = JSON.parse(
+      atob(parts[1].replace(/-/g, "+").replace(/_/g, "/"))
+    );
+    return (
+      payload?.name ||
+      payload?.fullName ||
+      payload?.given_name ||
+      payload?.unique_name ||
+      payload?.username ||
+      null
+    );
+  } catch {
+    return null;
+  }
+}
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState("");
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 1); // Cambia a sticky después de 1px de scroll
+      setIsScrolled(scrollTop > 1);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const readAuth = () => {
+      try {
+        const accessToken = localStorage.getItem("accessToken");
+        const expiresAt = localStorage.getItem("expiresAt");
+        const userRaw = localStorage.getItem("user");
+        const userNameDirect = localStorage.getItem("userName");
+
+        const notExpired = expiresAt ? new Date(expiresAt) > new Date() : true;
+        const authed = Boolean(accessToken) && notExpired;
+        setIsAuth(authed);
+
+        if (authed) {
+          // prioridad: userName directo > user guardado > JWT > fallback
+          if (userNameDirect) {
+            setUserName(userNameDirect);
+          } else if (userRaw) {
+            try {
+              const u = JSON.parse(userRaw);
+              const name = u?.name || u?.fullName || u?.username || "";
+              setUserName(name || "Usuario");
+              setAvatarUrl(u?.avatarUrl || "");
+            } catch {
+              setUserName("Usuario");
+            }
+          } else if (accessToken) {
+            const nameFromToken = decodeNameFromJwt(accessToken);
+            setUserName(nameFromToken || "Usuario");
+          } else {
+            setUserName("Usuario");
+          }
+        } else {
+          setUserName("");
+          setAvatarUrl("");
+        }
+      } catch {
+        setIsAuth(false);
+        setUserName("");
+        setAvatarUrl("");
+      }
+    };
+
+    // Inicial
+    readAuth();
+    // Cambios de ruta y eventos custom/storage
+    window.addEventListener("auth-changed", readAuth as EventListener);
+    window.addEventListener("storage", readAuth as EventListener);
+    return () => {
+      window.removeEventListener("auth-changed", readAuth as EventListener);
+      window.removeEventListener("storage", readAuth as EventListener);
+    };
+  }, [pathname]);
+
+  const handleLogout = () => {
+    try {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("expiresAt");
+      localStorage.removeItem("user");
+      localStorage.removeItem("userName");
+      setIsAuth(false);
+      setUserName("");
+      setAvatarUrl("");
+      window.dispatchEvent(new Event("auth-changed"));
+    } catch {}
+  };
 
   return (
     <header
@@ -69,14 +161,43 @@ const Header = () => {
           </span>
         </Button>
         <Separator orientation="vertical" className="h-7 w-0.5" />
-        <div className="flex items-center gap-2">
-          <Link href="/login">
-         <Button variant="text">Ingresar</Button>
-          </Link>
-          <Separator orientation="vertical" className="h-7 w-0.5" />
-          <Link href="/register">
-          <Button variant="text">Registrarse</Button>
-          </Link>
+        <div className="flex items-center gap-3">
+          {isAuth ? (
+            <>
+              <Avatar>
+                {avatarUrl ? (
+                  <AvatarImage src={avatarUrl} alt={userName} />
+                ) : (
+                  <AvatarFallback>
+                    {userName
+                      .split(" ")
+                      .filter(Boolean)
+                      .map((p) => p[0])
+                      .join("")
+                      .slice(0, 2)
+                      .toUpperCase()}
+                  </AvatarFallback>
+                )}
+              </Avatar>
+              <span className="text-white text-base font-bold block max-w-[200px] truncate capitalize">
+                {userName}
+              </span>
+              <Separator orientation="vertical" className="h-7 w-0.5" />
+              <Button variant="text" onClick={handleLogout}>
+                Cerrar sesion
+              </Button>
+            </>
+          ) : (
+            <>
+              <Link href="/login">
+                <Button variant="text">Ingresar</Button>
+              </Link>
+              <Separator orientation="vertical" className="h-7 w-0.5" />
+              <Link href="/register">
+                <Button variant="text">Registrarse</Button>
+              </Link>
+            </>
+          )}
         </div>
       </section>
     </header>

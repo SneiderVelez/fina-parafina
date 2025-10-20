@@ -79,6 +79,19 @@ export default function LoginPage() {
           localStorage.setItem("refreshToken", response.data.refreshToken);
         if (response.data.expiresAt)
           localStorage.setItem("expiresAt", response.data.expiresAt);
+        if (response.data.user)
+          localStorage.setItem("user", JSON.stringify(response.data.user));
+        // Persistir también un nombre directo para el header
+        try {
+          const u: any = response.data.user;
+          const name = u?.name || u?.fullName || u?.username || "";
+          if (name) localStorage.setItem("userName", name as string);
+        } catch {}
+
+        // Notificar al header que cambió el estado de sesión
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new Event("auth-changed"));
+        }
 
         toast("Inicio de sesión exitoso", {
           description: response.data.message || "Bienvenido de nuevo",
@@ -88,7 +101,7 @@ export default function LoginPage() {
         router.push("/");
       } else {
         toast("No se pudo iniciar sesión", {
-          description: response.data.message || "Credenciales inválidas",
+          description: response.data.message || "Correo inválido",
           action: { label: "Cerrar", onClick: () => {} },
         });
       }
@@ -98,7 +111,7 @@ export default function LoginPage() {
         description:
           axiosError.response?.data?.message ||
           (axiosError.response?.status === 401
-            ? "Credenciales inválidas"
+            ? "Correo inválido"
             : "Ha ocurrido un error en el login. Intenta nuevamente"),
         action: { label: "Cerrar", onClick: () => {} },
       });
