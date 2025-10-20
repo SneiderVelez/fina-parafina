@@ -8,6 +8,17 @@ import Link from "next/link";
 import { ArrowLeft, Mail, CheckCircle } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { ChangeEvent, MouseEvent, useState } from "react";
+import axios, { AxiosError } from "axios";
+import { toast } from "sonner";
+
+type ForgotPasswordRequest = {
+  email: string;
+};
+
+type ForgotPasswordResponse = {
+  success: boolean;
+  message: string;
+};
 
 export default function ForgotPasswordPage() {
   const router = useRouter();
@@ -34,19 +45,37 @@ export default function ForgotPasswordPage() {
     const error = validateEmail(email);
     setEmailErrors(error);
 
-    if (error) {
-      return;
-    }
+    if (error) return;
 
     setIsLoading(true);
     setEmailErrors("");
 
     try {
-      // Aquí iría la llamada real al API: await forgotPassword({ email });
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulación
-      setIsSuccess(true);
+      const request: ForgotPasswordRequest = { email };
+      const { data } = await axios.post<ForgotPasswordResponse>(
+        "http://localhost:5273/api/auth/forgot-password",
+        request
+      );
+
+      if (data.success) {
+        setIsSuccess(true);
+        toast("Solicitud enviada", {
+          description: data.message || "Revisa tu bandeja de entrada",
+          action: { label: "Cerrar", onClick: () => {} },
+        });
+      } else {
+        toast("No se pudo enviar", {
+          description: data.message || "Inténtalo nuevamente",
+          action: { label: "Cerrar", onClick: () => {} },
+        });
+      }
     } catch (error) {
-      setEmailErrors("Error al enviar la solicitud. Inténtalo de nuevo.");
+      const axiosError = error as AxiosError<ForgotPasswordResponse>;
+      const msg =
+        axiosError.response?.data?.message ||
+        "Error al enviar la solicitud. Inténtalo de nuevo.";
+      setEmailErrors(msg);
+      toast("Error", { description: msg, action: { label: "Cerrar", onClick: () => {} } });
     } finally {
       setIsLoading(false);
     }
@@ -67,21 +96,16 @@ export default function ForgotPasswordPage() {
             <CheckCircle className="w-8 h-8 text-green-600" />
           </div>
 
-          <h1 className="text-[32px] font-bold font-jakarta text-black">
-            ¡Solicitud enviada!
-          </h1>
+          <h1 className="text-[32px] font-bold font-jakarta text-black">¡Solicitud enviada!</h1>
 
           <p className="text-gray-600 text-lg leading-relaxed">
-            Si el email{" "}
-            <span className="font-semibold text-black">{email}</span> existe en
-            nuestro sistema, recibirás un enlace para restablecer tu contraseña
-            en los próximos minutos.
+            Si el email <span className="font-semibold text-black">{email}</span> existe en nuestro sistema,
+            recibirás un enlace para restablecer tu contraseña en los próximos minutos.
           </p>
 
           <div className="bg-blue-50 rounded-lg p-4 w-full">
             <p className="text-sm text-blue-700">
-              Revisa tu bandeja de entrada y carpeta de spam. El enlace expirará
-              en 24 horas.
+              Revisa tu bandeja de entrada y carpeta de spam. El enlace puede expirar.
             </p>
           </div>
 
@@ -105,10 +129,7 @@ export default function ForgotPasswordPage() {
         <div className="w-[600px] flex flex-col items-center gap-4">
           <Separator className="bg-gray-400" />
           <p className="text-sm text-black">
-            ¿Necesitas ayuda?{" "}
-            <Button variant="link" asChild>
-              <Link href="/contacto">Contáctanos</Link>
-            </Button>
+            ¿Necesitas ayuda? <Button variant="link" asChild><Link href="/contacto">Contáctanos</Link></Button>
           </p>
         </div>
       </main>
@@ -150,11 +171,7 @@ export default function ForgotPasswordPage() {
             </div>
           </div>
 
-          <Button
-            className="w-full"
-            onClick={handleSubmit}
-            disabled={isLoading}
-          >
+          <Button className="w-full" onClick={handleSubmit} disabled={isLoading}>
             {isLoading ? (
               <>
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
@@ -171,8 +188,7 @@ export default function ForgotPasswordPage() {
 
         <div className="bg-gray-50 rounded-lg p-4">
           <p className="text-sm text-gray-600 text-center">
-            Ingresa el email asociado a tu cuenta y te enviaremos un enlace
-            seguro para restablecer tu contraseña.
+            Ingresa el email asociado a tu cuenta y te enviaremos un enlace seguro para restablecer tu contraseña.
           </p>
         </div>
       </section>
@@ -180,12 +196,10 @@ export default function ForgotPasswordPage() {
       <div className="w-[600px] flex flex-col items-center gap-4">
         <Separator className="bg-gray-400" />
         <p className="text-sm text-black">
-          ¿Recordaste tu contraseña?{" "}
-          <Button variant="link" asChild>
-            <Link href="/login">Iniciar sesión</Link>
-          </Button>
+          ¿Recordaste tu contraseña? <Button variant="link" asChild><Link href="/login">Iniciar sesión</Link></Button>
         </p>
       </div>
     </main>
   );
 }
+

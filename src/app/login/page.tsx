@@ -172,7 +172,7 @@ export default function LoginPage() {
         <Separator className="bg-gray-400" />
         <Button variant={"link"}>
           <Link
-            href="/recuperar-password"
+            href="/forgot-password"
             className="text-sm text-red hover:underline"
           >
             ¿Olvidaste tu contraseña?
@@ -182,4 +182,3 @@ export default function LoginPage() {
     </main>
   );
 }
-
