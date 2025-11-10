@@ -1,12 +1,16 @@
+"use client";
+
 import { Badge } from "./badge";
 import { Button } from "./button";
 import Image from "next/image";
+import { useCart } from "@/context/cart-context";
+import { formatCOP } from "@/lib/utils";
 
 interface CardProductsProps {
   image_product: string;
   title: string;
   description?: string;
-  price: string;
+  price: number; // ahora numérico (COP)
   type: string;
   melting_point?: string;
   base?: string;
@@ -28,6 +32,20 @@ const CardProducts = ({
   variant = "light",
 }: CardProductsProps) => {
   const bgColor = variant === "light" ? "bg-brand-tertiary" : "bg-gray-100";
+  const { addItem } = useCart();
+
+  const handleAddToCart = () => {
+    const priceNumber = typeof price === "number" ? price : 0;
+    const id = `${title}-${weight || type}`.toLowerCase().replace(/\s+/g, "-");
+    addItem({
+      id,
+      name: title,
+      price: priceNumber,
+      image: image_product,
+      variant: base || type,
+      quantity: 1,
+    });
+  };
 
   return (
     <div
@@ -41,7 +59,7 @@ const CardProducts = ({
           className="object-cover object-center"
         />
         <Badge variant="secondary" size="sm" className="absolute top-2 left-0">
-          {price}
+          {formatCOP(price)} COP
         </Badge>
       </section>
       <section className="bg-brand-tertiary text-gray-700 p-3 xl:p-4 rounded-b-2xl flex flex-col gap-2 flex-1">
@@ -87,7 +105,7 @@ const CardProducts = ({
           {/* <Button variant="outline" size="sm">
             Ver detalle
           </Button> */}
-          <Button variant="outline" className="w-full">
+          <Button variant="outline" className="w-full" onClick={handleAddToCart}>
             Añadir al carrito
           </Button>
         </footer>

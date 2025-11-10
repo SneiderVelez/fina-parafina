@@ -14,7 +14,7 @@ const KitSection = () => {
       name: "Kit Básico para Velas",
       description:
         "Todo lo que necesitas para dar tus primeros pasos en el mundo de las velas. Simple, práctico y perfecto para principiantes",
-      price: "$89.000 COP",
+      price: 89000,
       buttonText: "Empieza ahora",
       level: "NIVEL BÁSICO",
     },
@@ -23,7 +23,7 @@ const KitSection = () => {
       name: "Kit de Velas Aromáticas",
       description:
         "Explora la magia de los aromas y crea velas únicas para ambientar tus espacios. Ideal para quienes buscan un toque personal y creativo.",
-      price: "$125.000 COP",
+      price: 125000,
       buttonText: "Descubre aromas",
       level: "NIVEL INTERMEDIO",
     },
@@ -32,7 +32,7 @@ const KitSection = () => {
       name: "Kit Premium Creativo",
       description:
         "El kit más completo para los verdaderos apasionados de la creación de velas. Materiales de alta calidad para proyectos únicos.",
-      price: "$189.000 COP",
+      price: 189000,
       buttonText: "Llévalo todo",
       level: "NIVEL AVANZADO",
     },

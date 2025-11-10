@@ -8,6 +8,9 @@ import { Button } from "../ui/button";
 import Logo from "../../../public/image/Logo.svg";
 import { Separator } from "../ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Sheet, SheetTrigger } from "../ui/sheet";
+import CartSheetContent from "../cart/cart-sheet";
+import { useCart } from "@/context/cart-context";
 
 function decodeNameFromJwt(token: string): string | null {
   try {
@@ -140,26 +143,8 @@ const Header = () => {
         </Link>
       </section>
       <section className="flex items-center gap-4">
-        <Button variant="ghost" className="relative transition-colors">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-white hover:text-yellow"
-          >
-            <circle cx="9" cy="21" r="1"></circle>
-            <circle cx="20" cy="21" r="1"></circle>
-            <path d="m1 1 4 4 13 1-1 7H6"></path>
-          </svg>
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-            0
-          </span>
-        </Button>
+        {/* Carrito */}
+        <CartButtonWithSheet />
         <Separator orientation="vertical" className="h-7 w-0.5" />
         <div className="flex items-center gap-3">
           {isAuth ? (
@@ -207,3 +192,36 @@ const Header = () => {
 };
 
 export default Header;
+
+// Subcomponente: Botón de carrito con Sheet
+function CartButtonWithSheet() {
+  const { count } = useCart();
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button variant="ghost" className="relative transition-colors" aria-label="Abrir carrito">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-white hover:text-yellow"
+            aria-hidden="true"
+          >
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="m1 1 4 4 13 1-1 7H6"></path>
+          </svg>
+          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+            {count}
+          </span>
+        </Button>
+      </SheetTrigger>
+      <CartSheetContent />
+    </Sheet>
+  );
+}

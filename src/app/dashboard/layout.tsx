@@ -96,14 +96,15 @@ export default function DashboardLayout({
   if (checking) {
     return (
       <main className="min-h-[60vh] px-5 py-10 flex items-center justify-center">
-        <div className="animate-pulse text-gray-600">Preparando tu panel...</div>
+        <div className="animate-pulse text-gray-600">
+          Preparando tu panel...
+        </div>
       </main>
     );
   }
 
   return (
     <div className="px-5 py-6 md:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-6">
-      {/* Sidebar */}
       <aside className="bg-white rounded-2xl shadow-custom p-4 h-max sticky top-[110px] self-start max-h-[calc(100vh-110px)] overflow-y-auto hidden lg:block">
         <nav className="flex flex-col gap-1">
           <Link
@@ -179,15 +180,19 @@ export default function DashboardLayout({
         <div className="bg-white rounded-2xl shadow-custom p-5 mb-6">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold text-gray-700 font-jakarta">
-                Hola, {displayName} 👋
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-700 font-jakarta capitalize">
+                Hola, {displayName}
               </h1>
               <p className="text-gray-600">
                 Gestiona tus pedidos y preferencias desde un solo lugar.
               </p>
             </div>
             <div className="flex items-center gap-4">
-              <Button variant="outline" className="relative" aria-label="Notificaciones">
+              <Button
+                variant="outline"
+                className="relative"
+                aria-label="Notificaciones"
+              >
                 <Bell className="w-5 h-5" />
                 {notifications > 0 && (
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
@@ -196,7 +201,10 @@ export default function DashboardLayout({
                 )}
               </Button>
               <Separator orientation="vertical" className="h-8 w-0.5" />
-              <Link href="/dashboard/perfil" className="flex items-center gap-3 group">
+              <Link
+                href="/dashboard/perfil"
+                className="flex items-center gap-3 group"
+              >
                 <Avatar>
                   {user?.avatarUrl ? (
                     <AvatarImage src={user.avatarUrl} alt={displayName} />
@@ -212,7 +220,9 @@ export default function DashboardLayout({
                     </AvatarFallback>
                   )}
                 </Avatar>
-                <span className="hidden md:block text-gray-700 font-bold group-hover:text-yellow">Configurar</span>
+                <span className="hidden md:block text-gray-700 font-bold group-hover:text-yellow">
+                  Configurar
+                </span>
               </Link>
               <Button variant="destructive" onClick={handleLogout}>
                 Cerrar sesión
@@ -221,7 +231,6 @@ export default function DashboardLayout({
           </div>
         </div>
 
-        {/* Nav móvil (en lugar de sidebar) */}
         <div className="lg:hidden bg-white rounded-2xl shadow-custom p-2 mb-6 overflow-x-auto">
           <div className="flex items-center gap-2 min-w-max">
             <Link
@@ -272,4 +281,3 @@ export default function DashboardLayout({
     </div>
   );
 }
-

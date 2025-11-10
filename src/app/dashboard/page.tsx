@@ -80,18 +80,30 @@ export default function DashboardPage() {
   };
 
   // Valores normalizados para la sección de cuenta
-  const nameValue = useMemo(() => (
-    (user?.name as string) || (user?.fullName as string) || (user?.username as string) || ""
-  ), [user]);
+  const nameValue = useMemo(
+    () =>
+      (user?.name as string) ||
+      (user?.fullName as string) ||
+      (user?.username as string) ||
+      "",
+    [user]
+  );
   const emailValue = (user?.email as string) || "";
   const dobValue = getDOB();
   const dobFormattedValue = dobValue ? getDOBFormatted() : "";
   const ageValue = dobValue ? getAge() : "";
-  const phoneValue = (user?.phone as string) || (user?.telefono as string) || (user?.phoneNumber as string) || "";
-  const addressValue = (user?.address as string) || (user?.direccion as string) || "";
+  const phoneValue =
+    (user?.phone as string) ||
+    (user?.telefono as string) ||
+    (user?.phoneNumber as string) ||
+    "";
+  const addressValue =
+    (user?.address as string) || (user?.direccion as string) || "";
   const cityValue = (user?.city as string) || (user?.ciudad as string) || "";
-  const countryValue = (user?.country as string) || (user?.pais as string) || "";
-  const documentValue = (user?.document as string) || (user?.documento as string) || "";
+  const countryValue =
+    (user?.country as string) || (user?.pais as string) || "";
+  const documentValue =
+    (user?.document as string) || (user?.documento as string) || "";
 
   return (
     <main className="flex flex-col gap-8">
@@ -102,7 +114,7 @@ export default function DashboardPage() {
           { label: "Completados", value: 0 },
           { label: "Última compra", value: "-" },
         ].map((k) => (
-          <div key={k.label} className="bg-white rounded-2xl shadow-custom p-5">
+          <div key={k.label} className="bg-white rounded-2xl p-5">
             <p className="text-gray-600 text-sm">{k.label}</p>
             <p className="text-2xl font-bold text-gray-700 mt-1">{k.value}</p>
           </div>
@@ -110,15 +122,23 @@ export default function DashboardPage() {
       </section>
 
       {/* Pedidos recientes */}
-      <section className="bg-white rounded-2xl shadow-custom p-6 flex flex-col gap-4">
+      <section className="bg-white rounded-2xl  p-6 flex flex-col gap-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-bold text-gray-700">Mis pedidos recientes</h2>
+          <h2 className="text-xl font-bold text-gray-700">
+            Mis pedidos recientes
+          </h2>
         </div>
         <Separator className="bg-gray-400" />
         <div className="text-gray-600 flex flex-col gap-3">
           <div className="flex items-center justify-center py-6 text-center">
             <div>
-              <Image src="/image/icon-candle.png" alt="Sin pedidos" width={48} height={48} className="mx-auto opacity-70" />
+              <Image
+                src="/image/icon-candle.png"
+                alt="Sin pedidos"
+                width={48}
+                height={48}
+                className="mx-auto opacity-70"
+              />
               <p className="mt-2">Aún no tienes pedidos.</p>
               <Button asChild className="mt-3">
                 <Link href="/catalogo">Ir al catálogo</Link>
@@ -130,9 +150,11 @@ export default function DashboardPage() {
 
       {/* Información de la cuenta */}
       <section className="flex flex-col gap-3">
-        <h2 className="text-xl font-bold text-gray-700">Información de la cuenta</h2>
+        <h2 className="text-xl font-bold text-gray-700">
+          Información de la cuenta
+        </h2>
         <Separator className="bg-gray-400" />
-        <ul className="bg-white rounded-2xl shadow-custom p-5 divide-y divide-gray-200">
+        <ul className="bg-white rounded-2xl p-5 divide-y divide-gray-200">
           {[
             { label: "Nombre", value: nameValue },
             { label: "Correo", value: emailValue },
@@ -144,23 +166,36 @@ export default function DashboardPage() {
             { label: "País", value: countryValue },
             { label: "Documento", value: documentValue },
           ]
-            .filter((i) => i.value && String(i.value).trim() !== "" && i.value !== "Aún no configurado")
+            .filter(
+              (i) =>
+                i.value &&
+                String(i.value).trim() !== "" &&
+                i.value !== "Aún no configurado"
+            )
             .map((i) => (
-              <li key={i.label} className="flex items-center justify-between py-3">
+              <li
+                key={i.label}
+                className="flex items-center justify-between py-3"
+              >
                 <span className="text-gray-600 text-sm">{i.label}</span>
                 <span className="text-gray-700 font-bold">{i.value}</span>
               </li>
             ))}
         </ul>
         <div className="text-right">
-          <Link href="/dashboard/perfil" className="text-yellow hover:underline text-sm">
+          <Link
+            href="/dashboard/perfil"
+            className="text-yellow hover:underline text-sm"
+          >
             Completar o editar información
           </Link>
         </div>
       </section>
 
       <section className="flex flex-col gap-3">
-        <h2 className="text-xl font-bold text-gray-700">Recomendados para ti</h2>
+        <h2 className="text-xl font-bold text-gray-700">
+          Recomendados para ti
+        </h2>
         <Separator className="bg-gray-400" />
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
           {[1, 2, 3, 4].map((i) => (
@@ -171,7 +206,7 @@ export default function DashboardPage() {
               description="Notas suaves y cálidas."
               type="Fragancia"
               weight="250 ml"
-              price="$9.990"
+              price={9990}
               variant="light"
             />
           ))}
@@ -180,3 +215,4 @@ export default function DashboardPage() {
     </main>
   );
 }
+

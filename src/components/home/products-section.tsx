@@ -11,7 +11,7 @@ const ProductsSection = () => {
           <CardProducts
             image_product={"/image/ceraSoya.jpg"}
             title="Cera de Soya 100% Natural"
-            price="$27.000 COP"
+            price={27000}
             type="APF (Alto Punto de Fusión)"
             melting_point="55-56 °C"
             weight="1kg"
@@ -22,7 +22,7 @@ const ProductsSection = () => {
             image_product={"/image/colorantes.jpg"}
             title="Colorantes Líquidos"
             description="No manchan moldes"
-            price="$13,500 COP"
+            price={13000}
             type="Líquidos liposolubles"
             weight="30kg"
             buttonText="Ver detalle"
@@ -31,7 +31,7 @@ const ProductsSection = () => {
           <CardProducts
             image_product={"/image/aroma.jpg"}
             title=" Aromas Premium"
-            price="$11,000 COP"
+            price={11000}
             type="Premium para velas/jabones/masajes"
             base="Aceite"
             weight="1 onza"

@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/shared/footer";
 import Header from "@/components/shared/header";
 import { Toaster } from "sonner";
+import { CartProvider } from "@/context/cart-context";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -38,10 +39,12 @@ export default function RootLayout({
       className={`${lato.variable} ${plusJakarta.variable} ${pacifico.variable}`}
     >
       <body className="font-lato bg-brand-secondary">
-        <Header />
-        {children}
-        <Footer />
-        <Toaster />
+        <CartProvider>
+          <Header />
+          {children}
+          <Footer />
+          <Toaster />
+        </CartProvider>
       </body>
     </html>
   );
