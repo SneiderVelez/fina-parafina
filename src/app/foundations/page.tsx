@@ -19,7 +19,7 @@ const FoundationsPage = () => {
         </article>
         <article></article>
         <article className="bg-red-800 w-full h-20">
-          <Button variant={"text_footer"}>contacto</Button>
+          <Button variant={"footer"}>contacto</Button>
         </article>
       </section>
     </main>
