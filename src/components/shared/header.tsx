@@ -130,7 +130,7 @@ const Header = () => {
           <Button variant="text">Inicio</Button>
         </Link>
         <Link href="/catalogo">
-          <Button variant="text">Catalogo</Button>
+          <Button variant="text">Catálogo</Button>
         </Link>
         <Link href="/quienes-somos">
           <Button variant="text">Nosotros</Button>
@@ -164,28 +164,30 @@ const Header = () => {
         <div className="flex items-center gap-3">
           {isAuth ? (
             <>
-              <Avatar>
-                {avatarUrl ? (
-                  <AvatarImage src={avatarUrl} alt={userName} />
-                ) : (
-                  <AvatarFallback>
-                    {userName
-                      .split(" ")
-                      .filter(Boolean)
-                      .map((p) => p[0])
-                      .join("")
-                      .slice(0, 2)
-                      .toUpperCase()}
-                  </AvatarFallback>
-                )}
-              </Avatar>
-              <span className="text-white text-base font-bold block max-w-[200px] truncate capitalize">
-                {userName}
-              </span>
-              <Separator orientation="vertical" className="h-7 w-0.5" />
-              <Button variant="text" onClick={handleLogout}>
-                Cerrar sesion
-              </Button>
+              <Link
+                href="/dashboard"
+                className="flex items-center gap-3 group"
+                aria-label="Ir a mi panel"
+              >
+                <Avatar>
+                  {avatarUrl ? (
+                    <AvatarImage src={avatarUrl} alt={userName} />
+                  ) : (
+                    <AvatarFallback>
+                      {userName
+                        .split(" ")
+                        .filter(Boolean)
+                        .map((p) => p[0])
+                        .join("")
+                        .slice(0, 2)
+                        .toUpperCase()}
+                    </AvatarFallback>
+                  )}
+                </Avatar>
+                <span className="text-white text-base font-bold block max-w-[200px] truncate capitalize group-hover:text-yellow">
+                  {userName}
+                </span>
+              </Link>
             </>
           ) : (
             <>
