@@ -8,6 +8,9 @@ import { Button } from "../ui/button";
 import Logo from "../../../public/image/Logo.svg";
 import { Separator } from "../ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Sheet, SheetTrigger } from "../ui/sheet";
+import CartSheetContent from "../cart/cart-sheet";
+import { useCart } from "@/context/cart-context";
 
 function decodeNameFromJwt(token: string): string | null {
   try {
@@ -130,7 +133,7 @@ const Header = () => {
           <Button variant="text">Inicio</Button>
         </Link>
         <Link href="/catalogo">
-          <Button variant="text">Catalogo</Button>
+          <Button variant="text">Catálogo</Button>
         </Link>
         <Link href="/quienes-somos">
           <Button variant="text">Nosotros</Button>
@@ -140,52 +143,36 @@ const Header = () => {
         </Link>
       </section>
       <section className="flex items-center gap-4">
-        <Button variant="ghost" className="relative transition-colors">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-white hover:text-yellow"
-          >
-            <circle cx="9" cy="21" r="1"></circle>
-            <circle cx="20" cy="21" r="1"></circle>
-            <path d="m1 1 4 4 13 1-1 7H6"></path>
-          </svg>
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-            0
-          </span>
-        </Button>
+        {/* Carrito */}
+        <CartButtonWithSheet />
         <Separator orientation="vertical" className="h-7 w-0.5" />
         <div className="flex items-center gap-3">
           {isAuth ? (
             <>
-              <Avatar>
-                {avatarUrl ? (
-                  <AvatarImage src={avatarUrl} alt={userName} />
-                ) : (
-                  <AvatarFallback>
-                    {userName
-                      .split(" ")
-                      .filter(Boolean)
-                      .map((p) => p[0])
-                      .join("")
-                      .slice(0, 2)
-                      .toUpperCase()}
-                  </AvatarFallback>
-                )}
-              </Avatar>
-              <span className="text-white text-base font-bold block max-w-[200px] truncate capitalize">
-                {userName}
-              </span>
-              <Separator orientation="vertical" className="h-7 w-0.5" />
-              <Button variant="text" onClick={handleLogout}>
-                Cerrar sesion
-              </Button>
+              <Link
+                href="/dashboard"
+                className="flex items-center gap-3 group"
+                aria-label="Ir a mi panel"
+              >
+                <Avatar>
+                  {avatarUrl ? (
+                    <AvatarImage src={avatarUrl} alt={userName} />
+                  ) : (
+                    <AvatarFallback>
+                      {userName
+                        .split(" ")
+                        .filter(Boolean)
+                        .map((p) => p[0])
+                        .join("")
+                        .slice(0, 2)
+                        .toUpperCase()}
+                    </AvatarFallback>
+                  )}
+                </Avatar>
+                <span className="text-white text-base font-bold block max-w-[200px] truncate capitalize group-hover:text-yellow">
+                  {userName}
+                </span>
+              </Link>
             </>
           ) : (
             <>
@@ -205,3 +192,36 @@ const Header = () => {
 };
 
 export default Header;
+
+// Subcomponente: Botón de carrito con Sheet
+function CartButtonWithSheet() {
+  const { count } = useCart();
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button variant="ghost" className="relative transition-colors" aria-label="Abrir carrito">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-white hover:text-yellow"
+            aria-hidden="true"
+          >
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="m1 1 4 4 13 1-1 7H6"></path>
+          </svg>
+          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+            {count}
+          </span>
+        </Button>
+      </SheetTrigger>
+      <CartSheetContent />
+    </Sheet>
+  );
+}

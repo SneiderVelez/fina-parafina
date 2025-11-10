@@ -1,12 +1,13 @@
 import { Badge } from "./badge";
 import { Button } from "./button";
 import Image from "next/image";
+import { formatCOP } from "@/lib/utils";
 
 interface CardKitProps {
   image: string;
   name: string;
   description: string;
-  price: string;
+  price: number; // COP
   buttonText?: string;
   variant?: "light" | "dark";
   level?: string;
@@ -58,7 +59,7 @@ const CardKit = ({
           <div className="flex flex-col  items-center justify-between gap-3 mt-4">
             <div className="text-center lg:text-left">
               <span className="font-jakarta text-xl lg:text-2xl font-bold text-black">
-                {price}
+                {formatCOP(price)} COP
               </span>
             </div>
             <Button className="w-full">{buttonText}</Button>

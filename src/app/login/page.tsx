@@ -98,7 +98,7 @@ export default function LoginPage() {
           action: { label: "Cerrar", onClick: () => {} },
         });
 
-        router.push("/");
+        router.push("/dashboard");
       } else {
         toast("No se pudo iniciar sesión", {
           description: response.data.message || "Correo inválido",
